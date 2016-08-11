@@ -255,7 +255,7 @@ prop_vega.prop_constant <- function(x, default_scale) {
 prop_vega.prop_variable <- function(x, default_scale) {
   compact(list(
     scale = if (prop_is_scaled(x)) x$scale,
-    field = paste0("data.", safe_vega_var(prop_label(x))),
+    field = paste0( safe_vega_var(prop_label(x))),
     mult = x$mult,
     offset = x$offset
   ))
@@ -278,7 +278,7 @@ prop_domain.prop_constant <- function(x, data) {
 prop_domain.prop_variable <- function(x, data) {
   list(
     data = data,
-    field = paste0("data.", safe_vega_var(prop_label(x)))
+    field = paste0(safe_vega_var(prop_label(x)))
   )
 }
 #' @export
