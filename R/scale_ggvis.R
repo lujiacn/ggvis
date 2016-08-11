@@ -96,7 +96,7 @@ as.vega.ggvis_scale <- function(x) {
     # Replace the domain with something that grabs it from the domain data
     x$domain <- list(
       data = paste0("scale/", x$name),
-      field = "data.domain"
+      field = "domain"
     )
   }
 
