@@ -133,7 +133,7 @@ ggvis = (function(_) {
       this.spec = null;      // Vega spec for this plot
       this.initialized = false; // Has update() or enter() been run?
       this.opts = {};
-      this.brush = new Plot.Brush(this);
+      // this.brush = new Plot.Brush(this); //disable due to Vega 2.x
       this.handlers = [];    // Interaction input handlers
       this._callbacks = new ggvis.CallbackRegistry(this);
     };
@@ -201,7 +201,7 @@ ggvis = (function(_) {
         self.removeHandlers();
         self.addHandlers(self.spec.handlers);
 
-        self.brush.enable();
+        // self.brush.enable();
 
         if (inExportPanel()) {
           $('.plot-gear-icon').hide();
@@ -885,7 +885,7 @@ ggvis = (function(_) {
 })(lodash);
 
 // This is like facet, but includes the key values in a  at each level.
-vg.data.facet = function() {
+vg.facet = function() {
 
   var keys = [], key_funs = [];
 
