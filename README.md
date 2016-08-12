@@ -44,3 +44,19 @@ mtcars %>% ggvis(~mpg, ~wt) %>% layer_points()
 The vignettes, available from http://ggvis.rstudio.com/, provide many more details. Start with the introduction, then work your way through the more advanced topics. Also check out the
 various demos in the `demo/` directory. See the basics in `demo/scatterplot.r`
 then check out the the coolest demos, `demo/interactive.r` and `demo/tourr.r`.
+
+## Branch vega-2.x (github.com/lujiacn/ggvis) 
+### Upgraded vega to version 2.6
+
+### Enable tooltip on static page 
+Added <mark>tooltip</mark> keywords. Example:
+```r
+devtools::install_github("lujiacn/ggvis", ref="vega-2.x")
+library(ggvis)
+library(dplyr)
+
+mtcars %>% 
+      mutate(tooltip = paste0("MPG: ", mpg, "</br>", "CYL: ", cyl)) %>%
+      ggvis(~mpg, ~cyl) %>% 
+      layer_points(fill := "steelblue", tooltip := ~tooltip)
+```
