@@ -59,8 +59,15 @@ ggvis_dependencies <- function() {
       src = ggvis_path("ggvis"),
       script = "js/ggvis.js",
       stylesheet = "css/ggvis.css"
+    ),
+
+    htmltools::htmlDependency(
+      name = "underscore",
+      version = "1.8.3",
+      src = ggvis_path("lib/underscore"),
+      script = adjust_min("underscore_min.js")
     )
-  )
+    )
 
   deps
 }
