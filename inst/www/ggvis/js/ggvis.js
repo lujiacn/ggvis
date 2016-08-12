@@ -1,6 +1,6 @@
 /*jshint forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true,
-    strict:false, undef:true, unused:true, browser:true, jquery:true, maxerr:50,
-    curly:false, multistr:true */
+strict:false, undef:true, unused:true, browser:true, jquery:true, maxerr:50,
+curly:false, multistr:true */
 /*global vg, ggvis:true, lodash*/
 
 ggvis = (function(_) {
@@ -23,8 +23,8 @@ ggvis = (function(_) {
   function queryVar (name) {
     return decodeURI(window.location.search.replace(
       new RegExp("^(?:.*[&\\?]" +
-                 encodeURI(name).replace(/[\.\+\*]/g, "\\$&") +
-                 "(?:\\=([^&]*))?)?.*$", "i"),
+        encodeURI(name).replace(/[\.\+\*]/g, "\\$&") +
+        "(?:\\=([^&]*))?)?.*$", "i"),
       "$1"));
   }
 
@@ -132,7 +132,7 @@ ggvis = (function(_) {
       this.chart = null;     // Vega chart object on the page
       this.spec = null;      // Vega spec for this plot
       this.initialized = false; // Has update() or enter() been run?
-      this.opts = {};
+        this.opts = {};
       // this.brush = new Plot.Brush(this); //disable due to Vega 2.x
       this.handlers = [];    // Interaction input handlers
       this._callbacks = new ggvis.CallbackRegistry(this);
@@ -302,13 +302,13 @@ ggvis = (function(_) {
       if (keep_aspect === undefined) keep_aspect = false;
 
       var $wrap = this.getWrapper(),
-          $gear = $wrap.find(".plot-gear-icon"),
-          chart = this.chart,
-          padding = chart.padding(),
-          ratio = this.opts.width/this.opts.height;
+        $gear = $wrap.find(".plot-gear-icon"),
+        chart = this.chart,
+        padding = chart.padding(),
+        ratio = this.opts.width/this.opts.height;
 
       var newWidth = $wrap.width() - $gear.width() - padding.left - padding.right,
-          newHeight = $wrap.height() - padding.top - padding.bottom;
+        newHeight = $wrap.height() - padding.top - padding.bottom;
 
       if (keep_aspect) {
         if (newHeight > newWidth / ratio) {
@@ -578,9 +578,9 @@ ggvis = (function(_) {
     // properties. If key is provided, then pull out that key.
     function getMarkProp(markdef, propname) {
       if (propname === undefined || propname === null ||
-          markdef.properties === undefined) {
-        return {};
-      }
+        markdef.properties === undefined) {
+          return {};
+        }
       var property = markdef.properties[propname];
 
       if (property === undefined || property === null) {
@@ -891,13 +891,13 @@ vg.facet = function() {
 
   function facet(data) {
     var result = {
-          key: "",
-          keys: [],
-          values: []
-        },
-        map = {},
-        vals = result.values,
-        obj, klist, kstr, len, i, k, kv;
+      key: "",
+      keys: [],
+      values: []
+    },
+      map = {},
+      vals = result.values,
+      obj, klist, kstr, len, i, k, kv;
 
     if (keys.length === 0) {
       throw "Need at least one key";
@@ -962,6 +962,52 @@ $(function(){ //DOM Ready
 
     // Don't close the dropdown
     e.stopPropagation();
+  });
+  //
+  //static plot tooltips; by Jia Lu
+  $("div.ggvis-output").on("mouseenter", function() {
+    $('.ggvis-tooltip').remove();
+    plot_id = $(this).attr("id");
+    offset = $(this).offset();
+    view = ggvis.getPlot(plot_id).chart;
+    // view = ggvis.plots[plot_id].chart;
+
+    view.on("mouseover", function(event, item) {
+      $('.ggvis-tooltip').remove();
+      selector = "#"+plot_id ;
+      $el = $('<div id="ggvis-tooltip" class="ggvis-tooltip"></div>')
+        .appendTo(selector);
+      out_html = "";
+      objs = item;
+      //console.log(_.unescape(objs["tooltips"]))
+      if (typeof objs !== 'undefined') {
+        if ("tooltips" in objs) {
+          out_html = objs["tooltips"]
+        } else if ("key" in objs) {
+          out_html = objs["key"]
+        }
+        else {
+          $.each(objs, function(i,val){
+            val_size = val.toString().length;
+            output = i.toString().toUpperCase() + ":"
+            //check if is data string -- 13 length
+            if (val_size== 13 && !isNaN((new Date(val)).valueOf()) ){
+              output = output + JSON.stringify((new Date(val)).toDateString()) ;
+            } else {
+              output = output + JSON.stringify(val);
+            }
+            out_html = out_html+output + "</br>"
+          });
+        };
+
+        $el.html(_.unescape(out_html));
+        $el.css({
+          left:  event.pageX-offset.left+20,
+          top:   event.pageY-offset.top
+        });
+      };
+    }) ;
+
   });
 
 });
