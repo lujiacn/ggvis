@@ -53,19 +53,19 @@ ggvis_dependencies <- function() {
       script = adjust_min("lodash.min.js"),
       head = "<script>var lodash = _.noConflict();</script>"
     ),
+
+    htmltools::htmlDependency(
+      name = "underscore",
+      version = "1.8.3",
+      src = ggvis_path("lib/underscore"),
+      script = adjust_min("underscore-min.js")
+    ),
     htmltools::htmlDependency(
       name = "ggvis",
       version = as.character(utils::packageVersion("ggvis")),
       src = ggvis_path("ggvis"),
       script = "js/ggvis.js",
       stylesheet = "css/ggvis.css"
-    ),
-
-    htmltools::htmlDependency(
-      name = "underscore",
-      version = "1.8.3",
-      src = ggvis_path("lib/underscore"),
-      script = adjust_min("underscore_min.js")
     )
     )
 
