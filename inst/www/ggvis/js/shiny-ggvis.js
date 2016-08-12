@@ -231,7 +231,7 @@ $(function(){ //DOM Ready
         Shiny.onInputChange(self.plot.plotId + "_mouse_over",
           {
             plot_id: self.plot.plotId,
-            data: item.datum.data,
+            data: item.datum,
             pagex: event.pageX,
             pagey: event.pageY,
             _nonce: self._nonce_counter
@@ -285,7 +285,7 @@ $(function(){ //DOM Ready
         Shiny.onInputChange(self.plot.plotId + "_mouse_click",
           {
             plot_id: self.plot.plotId,
-            data: item.datum.data,
+            data: item.datum,
             pagex: event.pageX,
             pagey: event.pageY,
             _nonce: self._nonce_counter
@@ -327,7 +327,7 @@ $(function(){ //DOM Ready
       var self = this;
       return function(info) {
         info.items = info.items.map(function(item) {
-          var newitem = $.extend({}, item.datum.data);
+          var newitem = $.extend({}, item.datum);
           newitem.key__ = item.key;
           return newitem;
         });

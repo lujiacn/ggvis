@@ -981,23 +981,23 @@ $(function(){ //DOM Ready
       objs = item;
       //console.log(_.unescape(objs["tooltips"]))
       if (typeof objs !== 'undefined') {
-        if ("tooltips" in objs) {
-          out_html = objs["tooltips"]
-        } else if ("key" in objs) {
-          out_html = objs["key"]
-        }
-        else {
-          $.each(objs, function(i,val){
-            val_size = val.toString().length;
-            output = i.toString().toUpperCase() + ":"
-            //check if is data string -- 13 length
-            if (val_size== 13 && !isNaN((new Date(val)).valueOf()) ){
-              output = output + JSON.stringify((new Date(val)).toDateString()) ;
-            } else {
-              output = output + JSON.stringify(val);
+        if ("tooltip" in objs) {
+          out_html = objs["tooltip"]
+        } else {
+          $.each(objs.datum, function(i,val){
+            if (i !== "_id"){
+              val_size = val.toString().length;
+              output = i.toString().toUpperCase() + ":"
+              //check if is data string -- 13 length
+              if (val_size== 13 && !isNaN((new Date(val)).valueOf()) ){
+                output = output + JSON.stringify((new Date(val)).toDateString()) ;
+              } else {
+                output = output + JSON.stringify(val);
+              }
+              out_html = out_html+output + "</br>"
             }
-            out_html = out_html+output + "</br>"
-          });
+          }
+          );
         };
 
         $el.html(_.unescape(out_html));
