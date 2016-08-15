@@ -974,9 +974,9 @@ $(function(){ //DOM Ready
 
     view.on("mouseover", function(event, item) {
       $('.ggvis-tooltip').remove();
-      selector = "#"+plot_id+"-container" ;
+      selector = "#"+plot_id;
       $el = $('<div id="ggvis-tooltip" class="ggvis-tooltip"></div>')
-        .appendTo(selector);
+        .insertAfter(selector);
       out_html = "";
       objs = item;
       //console.log(_.unescape(objs["tooltips"]))
