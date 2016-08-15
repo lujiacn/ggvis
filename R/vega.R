@@ -210,7 +210,7 @@ as.vega.grouped_df <- function(x, name, ...) {
     source = paste0(name, "_flat"),
     transform = list(list(
       type = "facet",
-      keys = as.list(paste0( safe_vega_var(group_vars)))
+      groupby = as.list(paste0( safe_vega_var(group_vars)))
     ))
   )
 
