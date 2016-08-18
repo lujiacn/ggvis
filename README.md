@@ -60,3 +60,42 @@ mtcars %>%
       ggvis(~mpg, ~cyl) %>% 
       layer_points(fill := "steelblue", tooltip := ~tooltip)
 ```
+
+### Pie chart
+
+```
+library(ggvis)
+library(dplyr)
+#-----sample data
+data <- list(cat=c("A","B","C"), v = c(10,30,20))
+data <- as.data.frame(data)
+sum_n <- sum(data$v)
+data_len <- nrow(data)
+
+# calculate percentage, cat and v as variable
+data <- data %>% mutate(percent=round(v/sum_n, 2)) %>%
+  mutate(start_angle=NA, end_angle=NA) %>%
+  mutate(tooltips=paste0(v, ", ", percent, "%"))
+
+# calcuate start, end, mid angle
+dt <- data %>% 
+  mutate(cumsum = cumsum(percent)) %>%
+  mutate(start_angle=ifelse(row_number()==1, 0, lag(cumsum))) %>%
+  mutate(end_angle=cumsum) %>%
+  mutate(mid_angle = start_angle + (end_angle-start_angle)/2)
+
+canv_size <- 100
+ dt %>% ggvis(x=~0, y=~0) %>% 
+  scale_numeric("x",domain=c(-10,10)) %>%
+  scale_numeric("y",domain=c(-10,10)) %>%
+  layer_arcs(innerRadius:=0, outerRadius:=canv_size, 
+             fill = ~cat, 
+             stroke := "white",
+             strokeWidth := 1,
+             tooltip := ~tooltips,
+             startAngle=~start_angle, endAngle=~end_angle) %>%
+  layer_text( theta = prop("theta", ~mid_angle),
+    radius := canv_size+10, text := ~cat,
+    align := "center", baseline := "middle") %>%
+  set_options(height=canv_size)
+```
