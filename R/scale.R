@@ -53,7 +53,8 @@ propname_to_scale <- function(prop) {
     "innerRadius" = "radius",
     "outerRadius" = "radius",
     "startAngle" = "angle",
-    "endAngle" = "angle"
+    "endAngle" = "angle",
+    "theta" = "angle"
   )
 
   matches <- match(prop, names(simplify))

@@ -116,7 +116,7 @@ valid_props <- list(
   rect = c(common_valid_props, "x2", "y2", "width", "height"),
   symbol = c(common_valid_props, "size", "shape"),
   text = c(common_valid_props, "text", "align", "baseline", "dx", "dy", "angle",
-    "font", "fontSize", "fontWeight", "fontStyle")
+    "font", "fontSize", "fontWeight", "fontStyle", "theta", "radius")
 )
 
 # Hack to stop spurious warnings in R CMD check. Used in prop.
