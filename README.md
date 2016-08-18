@@ -99,3 +99,4 @@ canv_size <- 100
     align := "center", baseline := "middle") %>%
   set_options(height=canv_size)
 ```
+![pie_chart](https://raw.githubusercontent.com/lujiacn/ggvis/vega-2.x/sample/pie.png)
