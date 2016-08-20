@@ -41,6 +41,7 @@ ggvisOutputElements <- function(plot_id = rand_id("plot_id"), spec = NULL,
   htmltools::attachDependencies(
     htmltools::tagList(
       ggvisPlot(plot_id),
+      ggvisTooltip(plot_id),
       ggvisSpec(plot_id, spec)
     ),
     c(
@@ -60,6 +61,10 @@ ggvisPlot <- function(plot_id) {
   )
 }
 
+ggvisTooltip <- function(plot_id) {
+  htmltools::div(id = paste0(plot_id, "-tooltip"), class="ggvis-tooltip", style="z-index:99")
+}
+
 ggvisSpec <- function(plot_id, spec = NULL) {
   if (is.null(spec)) return()
   json <- jsonlite::toJSON(spec, pretty = TRUE, auto_unbox = TRUE, force = TRUE,
@@ -70,6 +75,7 @@ ggvisSpec <- function(plot_id, spec = NULL) {
     'ggvis.getPlot("', plot_id, '").parseSpec(', plot_id, '_spec);\n'
   ))
 }
+
 
 # Controls drop down
 ggvisControlGroup <- function(plot_id) {

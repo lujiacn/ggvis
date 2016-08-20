@@ -966,17 +966,16 @@ $(function(){ //DOM Ready
   //
   //static plot tooltips; by Jia Lu
   $("div.ggvis-output").on("mouseenter", function() {
-    $('.ggvis-tooltip').remove();
     plot_id = $(this).attr("id");
     offset = $(this).offset();
     view = ggvis.getPlot(plot_id).chart;
-    // view = ggvis.plots[plot_id].chart;
+    tooltip_id = "#"+plot_id+"-tooltip"
+
 
     view.on("mouseover", function(event, item) {
-      $('.ggvis-tooltip').remove();
-      selector = "#"+plot_id;
-      $el = $('<div id="ggvis-tooltip" class="ggvis-tooltip"></div>')
-        .insertAfter(selector);
+      selector = "#"+plot_id+"-tooltip";
+      // $('.ggvis-tooltip').remove();
+      $el = $(tooltip_id);
       out_html = "";
       objs = item;
       //console.log(_.unescape(objs["tooltips"]))
