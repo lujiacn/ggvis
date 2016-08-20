@@ -971,6 +971,13 @@ $(function(){ //DOM Ready
     view = ggvis.getPlot(plot_id).chart;
     tooltip_id = "#"+plot_id+"-tooltip"
 
+    view.on("click",  function(event, item) {
+      selector = "#"+plot_id+"-tooltip";
+      // $('.ggvis-tooltip').remove();
+      $el = $(tooltip_id);
+      $el.html("");
+      $el.hide();
+    });
 
     view.on("mouseover", function(event, item) {
       selector = "#"+plot_id+"-tooltip";
@@ -1004,6 +1011,7 @@ $(function(){ //DOM Ready
           left:  event.pageX-offset.left+20,
           top:   event.pageY-offset.top
         });
+        $el.show();
       };
     }) ;
 
