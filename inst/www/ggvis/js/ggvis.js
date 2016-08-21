@@ -989,21 +989,6 @@ $(function(){ //DOM Ready
       if (typeof objs !== 'undefined') {
         if ("tooltip" in objs) {
           out_html = objs["tooltip"]
-        } else {
-          $.each(objs.datum, function(i,val){
-            if (i !== "_id"){
-              val_size = val.toString().length;
-              output = i.toString().toUpperCase() + ":"
-              //check if is data string -- 13 length
-              if (val_size== 13 && !isNaN((new Date(val)).valueOf()) ){
-                output = output + JSON.stringify((new Date(val)).toDateString()) ;
-              } else {
-                output = output + JSON.stringify(val);
-              }
-              out_html = out_html+output + "</br>"
-            }
-          }
-          );
         };
 
         $el.html(_.unescape(out_html));
@@ -1016,5 +1001,4 @@ $(function(){ //DOM Ready
     }) ;
 
   });
-
 });
