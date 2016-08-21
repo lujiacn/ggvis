@@ -62,7 +62,7 @@ ggvisPlot <- function(plot_id) {
 }
 
 ggvisTooltip <- function(plot_id) {
-  htmltools::div(id = paste0(plot_id, "-tooltip"), class="ggvis-tooltip", style="z-index:99")
+  htmltools::div(id = paste0(plot_id, "-tooltip"), class="ggvis-tooltip", style="display:none")
 }
 
 ggvisSpec <- function(plot_id, spec = NULL) {
