@@ -970,6 +970,9 @@ $(function(){ //DOM Ready
     offset = $(this).offset();
     view = ggvis.getPlot(plot_id).chart;
     tooltip_id = "#"+plot_id+"-tooltip"
+    //clear View avoid mutiple enter introduced duplicated actions
+    view.off("click");
+    view.off("mouseover.custom");
 
     view.on("click",  function(event, item) {
       selector = "#"+plot_id+"-tooltip";
@@ -977,6 +980,13 @@ $(function(){ //DOM Ready
       $el = $(tooltip_id);
       $el.html("");
       $el.hide();
+      //open link
+      if (typeof item !== 'undefined') {
+        if ("link" in item) {
+          link = item["link"]
+          window.open(link);
+        };
+      };
     });
 
     view.on("mouseover", function(event, item) {
@@ -999,14 +1009,6 @@ $(function(){ //DOM Ready
       };
     });
 
-    view.on("mousedown", function(event, item) {
-      if (typeof objs !== 'undefined') {
-        if ("link" in objs) {
-          link = objs["link"]
-          window.open(link,'_blank');
-        };
-      };
-    });
   });
 
   $("div.ggvis-output").on("mouseout", function() {
