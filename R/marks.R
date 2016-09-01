@@ -104,7 +104,7 @@ layer_text <- function(vis, ..., data = NULL) {
 }
 
 common_valid_props <- c("x", "y", "stroke", "strokeOpacity", "fill",
-  "fillOpacity", "opacity", "strokeWidth", "strokeDash", "key", "tooltip")
+  "fillOpacity", "opacity", "strokeWidth", "strokeDash", "key", "tooltip", "link")
 
 valid_props <- list(
   arc = c(common_valid_props, "innerRadius", "outerRadius", "startAngle",

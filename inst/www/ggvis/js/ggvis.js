@@ -989,16 +989,34 @@ $(function(){ //DOM Ready
       if (typeof objs !== 'undefined') {
         if ("tooltip" in objs) {
           out_html = objs["tooltip"]
+          $el.html(_.unescape(out_html));
+          $el.css({
+            left:  event.pageX-offset.left+20,
+            top:   event.pageY-offset.top
+          });
+          $el.show();
         };
-
-        $el.html(_.unescape(out_html));
-        $el.css({
-          left:  event.pageX-offset.left+20,
-          top:   event.pageY-offset.top
-        });
-        $el.show();
       };
-    }) ;
+    });
 
+    view.on("mousedown", function(event, item) {
+      if (typeof objs !== 'undefined') {
+        if ("link" in objs) {
+          link = objs["link"]
+          window.open(link,'_blank');
+        };
+      };
+    });
   });
+
+  $("div.ggvis-output").on("mouseout", function() {
+    plot_id = $(this).attr("id");
+    tooltip_id = "#"+plot_id+"-tooltip"
+
+    selector = "#"+plot_id+"-tooltip";
+    $el = $(tooltip_id);
+    $el.html("");
+    $el.hide();
+  });
+
 });
