@@ -41,7 +41,6 @@ ggvisOutputElements <- function(plot_id = rand_id("plot_id"), spec = NULL,
   htmltools::attachDependencies(
     htmltools::tagList(
       ggvisPlot(plot_id),
-      ggvisTooltip(plot_id),
       ggvisSpec(plot_id, spec)
     ),
     c(
@@ -55,14 +54,11 @@ ggvisPlot <- function(plot_id) {
   htmltools::div(id = paste0(plot_id, "-container"), class = "ggvis-output-container",
     # Div containing the plot
     htmltools::div(id = plot_id, class = "ggvis-output"),
+    htmltools::div(id = paste0(plot_id, "-tooltip"), class="ggvis-tooltip", style="display:none"),
     htmltools::div(class = "plot-gear-icon",
       ggvisControlGroup(plot_id)
     )
   )
-}
-
-ggvisTooltip <- function(plot_id) {
-  htmltools::div(id = paste0(plot_id, "-tooltip"), class="ggvis-tooltip", style="display:none")
 }
 
 ggvisSpec <- function(plot_id, spec = NULL) {
