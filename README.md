@@ -61,9 +61,16 @@ mtcars %>%
       layer_points(fill := "steelblue", tooltip := ~tooltip)
 ```
 
-### Pie chart
-
+### Pie chart, with labels
+label part
+```r
+layer_text( theta = prop("theta", ~mid_angle),
+        radius := canv_size+10, text := ~cat,
+        align := "center", baseline := "middle")
 ```
+
+Complete sample
+```r
 library(ggvis)
 library(dplyr)
 #-----sample data
@@ -100,3 +107,22 @@ canv_size <- 100
   set_options(height=canv_size)
 ```
 <img src="https://raw.githubusercontent.com/lujiacn/ggvis/vega-2.x/sample/pie.png" height="250" width="300")>
+
+## Make the point clickable
+Sample code
+
+```r
+data <- data %>%
+  mutate(link = paste0("/sample.com/?Subject=",Subject)) %>%
+```
+
+```r
+ggvis() ... %>%
+layer_points(
+        tooltip :=~tooltips,
+        fill =~type,
+        size.hover := 200,
+        fillOpacity.hover := 1,
+        fillOpacity :=0.7,
+        link := ~link)
+```
