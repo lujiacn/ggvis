@@ -996,13 +996,29 @@ $(function(){ //DOM Ready
       out_html = "";
       objs = item;
       //console.log(_.unescape(objs["tooltips"]))
+      // console.log(offset.left)
+      // console.log(offset.top)
+      //bottom_border 
+      bottorm_border = view._height;
+      right_border = view._width;
+      // console.log(bottorm_border, right_border);
+
       if (typeof objs !== 'undefined') {
         if ("tooltip" in objs) {
           out_html = objs["tooltip"]
           $el.html(_.unescape(out_html));
+          //check if out of border
+          tool_left = event.pageX-offset.left+20;
+          tool_top = event.pageY-offset.top;
+          if (event.pageX - offset.left  + $el.width() > right_border) {
+              tool_left = tool_left-40-$el.width();
+          };
+          if (event.pageY -offset.top + $el.height() > bottorm_border) {
+            tool_top = tool_top-$el.height();
+          }
           $el.css({
-            left:  event.pageX-offset.left+20,
-            top:   event.pageY-offset.top
+            left:  tool_left,
+            top:   tool_top
           });
           $el.show();
         };
