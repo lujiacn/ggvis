@@ -106,8 +106,8 @@ canv_size <- 100
     align := "center", baseline := "middle") %>%
   set_options(height=canv_size)
 ```
-![Image of pie]
-(https://raw.githubusercontent.com/lujiacn/ggvis/vega-2.x/sample/pie.png)
+
+![Image of pie](https://raw.githubusercontent.com/lujiacn/ggvis/vega-2.x/sample/pie.png)
 
 ## Make the point clickable
 Sample code
